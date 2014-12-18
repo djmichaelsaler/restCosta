@@ -1,0 +1,3 @@
+    name: restCosta
+    main: com.craftcostaserver.restCosta.restCosta
+    version: 0.0.1
