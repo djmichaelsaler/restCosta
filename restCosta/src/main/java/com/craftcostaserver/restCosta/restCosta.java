@@ -7,7 +7,7 @@ public class restCosta extends JavaPlugin{
 	@Override
 	public void onEnable() {
 		try {
-			new Part05();
+			new Part03().arrancar();;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

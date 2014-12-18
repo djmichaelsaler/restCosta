@@ -5,24 +5,21 @@ import org.restlet.Server;
 import org.restlet.data.Protocol;
 import org.restlet.resource.Get;
 import org.restlet.resource.ServerResource;
-import org.restlet.util.ServerList;
 
-public class Part05 extends ServerResource{
-	public Part05() throws Exception{
+public class Part03 extends ServerResource{
+	public void arrancar() throws Exception{
 	    // Create a new Restlet component and add a HTTP server connector to it
-		//new Server(Protocol.HTTP, 8182, Part05.class).start();
-		Server s = new Server(Protocol.HTTP, 8182);
+		Server s = new Server(Protocol.HTTP, 8183);
+		s.start();
 	    Component component = new Component();
-	    component.getServers().);
+	    component.getServers().add(s);
 
 	    // Then attach it to the local host
-	    component.getDefaultHost().attach("/trace", Part05.class);
+	    component.getDefaultHost().attach("/trace", Part03.class);
 
 	    // Now, let's start the component!
 	    // Note that the HTTP server connector is also automatically started.
 	    component.start();
-	    
-	    
 	}
 
 	@Get
