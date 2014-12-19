@@ -1,0 +1,9 @@
+/server
+/server/users
+/server/user/{user}
+/server/user/{user}/economy
+/server/user/{user}/pet
+/server/user/{user}/residence
+/server/user/{user}
+/server/worlds
+/server/world/{world}
