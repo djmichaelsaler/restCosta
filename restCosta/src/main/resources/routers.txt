@@ -1,9 +1,9 @@
-/server
-/server/users
-/server/user/{user}
-/server/user/{user}/economy
-/server/user/{user}/pet
-/server/user/{user}/residence
-/server/user/{user}
-/server/worlds
-/server/world/{world}
+/								-> Info servicio REST
+/server							-> Info server(Varios, link lista users, link lista mundos)
+/server/users					-> Lista de users (Links a cada user)
+/server/user/{user}				-> Info de user(Varios, link economy, link pet, link residence)
+/server/user/{user}/economy		-> Info economy player (Bolsillo y Banco);
+/server/user/{user}/pet			-> Info Pet player (Pets del user y Caracteristicas detalladas)
+/server/user/{user}/residence	-> Info residence player (Lista de res y caracteristicas)
+/server/worlds					-> Lista de mundos (Link a cada mundo)
+/server/world/{world}			-> Info del mundo

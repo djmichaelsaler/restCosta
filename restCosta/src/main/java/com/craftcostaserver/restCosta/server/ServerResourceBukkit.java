@@ -1,4 +1,4 @@
-package com.craftcostaserver.restCosta;
+package com.craftcostaserver.restCosta.server;
 
 import org.restlet.data.MediaType;
 import org.restlet.representation.Representation;
