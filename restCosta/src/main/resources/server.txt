@@ -1,0 +1,32 @@
+ SERVER
+ 
+ String 	getServerName()
+          Get the name of this server.
+ String 	getBukkitVersion()
+          Gets the Bukkit version that this server is running.
+ String 	getIp()
+          Get the IP that this server is bound to, or empty string if not specified.
+ OfflinePlayer[] 	getOfflinePlayers()
+          Gets every player that has ever played on this server.
+ List<World> 	getWorlds()
+ 
+ PLAYER
+ 
+ String 	getName()
+          Returns the name of this player
+ long 		getFirstPlayed()
+          Gets the first date and time that this player was witnessed on this server.
+ long	 	getLastPlayed()
+          Gets the last date and time that this player was witnessed on this server.
+ boolean 	isOnline()
+          Checks if this player is currently online
+ double		Essentials money
+ 
+ double		Bank money
+ 
+ WORLD
+ 
+ String 	getName()
+          Gets the unique name of this world
+ long 		getTime()
+          Gets the relative in-game time of this world.
