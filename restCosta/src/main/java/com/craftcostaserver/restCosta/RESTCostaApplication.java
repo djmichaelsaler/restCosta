@@ -15,20 +15,30 @@ import com.craftcostaserver.restCosta.world.Worldsv;
 
 public class RESTCostaApplication extends Application{
 	
+	public restCosta plugin;
+	
+	public RESTCostaApplication(restCosta plugin){
+		this.plugin=plugin;
+	}
+	
 	@Override
 	public Restlet createInboundRoot(){
 		Router router = new Router(getContext());
 		//router.attach("/trace",Part03.class);
-		router.attach("/",Infosv.class);
+		//router.attach("/",Infosv.class);
 		router.attach("/server",Serversv.class);
 		router.attach("/server/users",Userssv.class);
 		router.attach("/server/user/{user}",Usersv.class);
 		router.attach("/server/user/{user}/economy",Economysv.class);
 		router.attach("/server/user/{user}/pet",Petsv.class);
-		router.attach("/server/user/{user}/residence",Residencesv.class);
+		//router.attach("/server/user/{user}/residence",Residencesv.class);
 		router.attach("/server/worlds",Worldssv.class);
 		router.attach("/server/world/{world}",Worldsv.class);
 		return router;
+	}
+	
+	public restCosta getPlugin(){
+		return this.plugin;
 	}
 
 }

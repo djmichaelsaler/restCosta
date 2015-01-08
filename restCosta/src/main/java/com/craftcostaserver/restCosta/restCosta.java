@@ -17,17 +17,19 @@ import com.craftcostaserver.restCosta.server.Serversv;
 import com.craftcostaserver.restCosta.world.Worldssv;
 import com.craftcostaserver.restCosta.world.Worldsv;
 
+import de.hotmail.gurkilein.bankcraft.Bankcraft;
+
 public class restCosta extends JavaPlugin{
 	
+	Server s;
 	
 	
 	@Override
 	public void onEnable() {
-		
-		
+	
 		try {
 		    // Create a new Restlet component and add a HTTP server connector to it
-			Server s = new Server(Protocol.HTTP, 8182);
+			s = new Server(Protocol.HTTP, 8182);
 			s.start();
 		    Component component = new Component();
 		    component.getServers().add(s);
@@ -35,7 +37,7 @@ public class restCosta extends JavaPlugin{
 		    // Then attach it to the local host
 		    //component.getDefaultHost().attach("/trace", Part03.class);
 		    
-		    Application app = new RESTCostaApplication();
+		    Application app = new RESTCostaApplication(this);
 			
 			component.getDefaultHost().attach(app);
 
@@ -51,6 +53,15 @@ public class restCosta extends JavaPlugin{
 	
 	@Override
 	public void onDisable() {
-
+		try {
+			s.stop();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public Bankcraft getBankcraft(){
+		return (Bankcraft)getServer().getPluginManager().getPlugin("Bankcraft");
 	}
 }
