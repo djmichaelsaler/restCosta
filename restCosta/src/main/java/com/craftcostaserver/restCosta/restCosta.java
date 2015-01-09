@@ -3,27 +3,13 @@ package com.craftcostaserver.restCosta;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.restlet.Application;
 import org.restlet.Component;
-import org.restlet.Restlet;
 import org.restlet.Server;
 import org.restlet.data.Protocol;
-import org.restlet.routing.Router;
-
-import com.craftcostaserver.restCosta.player.Economysv;
-import com.craftcostaserver.restCosta.player.Petsv;
-import com.craftcostaserver.restCosta.player.Residencesv;
-import com.craftcostaserver.restCosta.player.Userssv;
-import com.craftcostaserver.restCosta.player.Usersv;
-import com.craftcostaserver.restCosta.server.Serversv;
-import com.craftcostaserver.restCosta.world.Worldssv;
-import com.craftcostaserver.restCosta.world.Worldsv;
-
 import de.hotmail.gurkilein.bankcraft.Bankcraft;
 
 public class restCosta extends JavaPlugin{
 	
 	Server s;
-	
-	
 	@Override
 	public void onEnable() {
 	

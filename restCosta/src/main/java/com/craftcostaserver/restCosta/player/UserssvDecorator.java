@@ -1,9 +1,16 @@
 package com.craftcostaserver.restCosta.player;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.dom.DOMSource;
+
 import org.bukkit.OfflinePlayer;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import com.craftcostaserver.restCosta.server.ServersvDecorator;
 
@@ -28,22 +35,38 @@ public class UserssvDecorator {
 		return pJSON;
 	}
 
-	public static String getAsXMLDocument(OfflinePlayer[] offplayers) {
-		StringBuilder xml = new StringBuilder();
-		xml.append("<?xml version=\"1.0\"?>");
-		xml.append(getAsXMLElement(offplayers));
-		return xml.toString();
+	public static DOMSource getAsXMLDocument(OfflinePlayer[] offplayers) {
+		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder docBuilder;
+		DOMSource source;
+		try {
+			docBuilder = docFactory.newDocumentBuilder();
+			// root elements
+			Document doc = docBuilder.newDocument();
+			
+			doc = getAsXMLElement(doc, offplayers);
+			
+			source = new DOMSource(doc);
+			return source;
+		} catch (ParserConfigurationException e) {
+
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return source=null;
+		}
 	}
 
-	public static String getAsXMLElement(OfflinePlayer[] offplayers) {
-		StringBuilder xml = new StringBuilder();
-		xml.append("<users>");
-		StringBuilder xmlSub = new StringBuilder();
+	public static Document getAsXMLElement(Document doc,OfflinePlayer[] offplayers) {
+		
+		Element rootElement = doc.createElement("Players");
+		doc.appendChild(rootElement);
+		 
+		// staff elements
+		
 		for (int i = 0; i < offplayers.length; i++) {
-			xmlSub.append(UsersvDecorator.getAsXMLElement(new Usersv().getPlayerCosta(offplayers[i].getName())));
+			doc = UsersvDecorator.getAsXMLElement(doc, new Usersv().getPlayerCosta(offplayers[i].getName()));
 		}
-		xml.append(xmlSub);
-		xml.append("</users>");
-		return xml.toString();
+		return doc;
 	}
+
 }

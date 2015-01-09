@@ -1,7 +1,16 @@
 package com.craftcostaserver.restCosta.player;
 
+import java.io.StringWriter;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.xml.transform.Result;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.bukkit.OfflinePlayer;
 import org.json.JSONObject;
@@ -64,33 +73,35 @@ public class Userssv extends ServerResource{
 	}
 
 	@Get("xml")
-	public Representation getEntradaLlistaXML() {
-		String user = getPlugin().getServer().getOfflinePlayer(getUser())
-				.getName();
-		if (user == null) {
+	public Representation getEntradaLlistaXML(){
+		OfflinePlayer[] offplayers = getUsers();
+		if (offplayers.length == 0) {
 			setStatus(Status.CLIENT_ERROR_NOT_FOUND);
-			return new StringRepresentation("Usuario no encontrado!",
-					MediaType.TEXT_PLAIN);
+			return new StringRepresentation("No hay usuarios en el server!",MediaType.TEXT_PLAIN);
 		}
-		double pocket;
+		
 		try {
-			pocket = Economy.getMoney(getUser());
-			double bank = ((Bankcraft) getPlugin().getServer()
-					.getPluginManager().getPlugin("Bankcraft"))
-					.getMoneyDatabaseInterface().getBalance(getUser());
-			PlayerCosta p = new PlayerCosta(getUser(), pocket, bank);
-			JSONObject json = UsersvDecorator.getAsXMLDocument(p);
+			TransformerFactory transformerFactory = TransformerFactory.newInstance();
+			DOMSource dom = UserssvDecorator.getAsXMLDocument(offplayers);
+			
+			StringWriter xml = new StringWriter();
+			StreamResult result=new StreamResult(xml);
+			
+			Transformer transformer = transformerFactory.newTransformer();
+			transformer.transform(dom, result);
 
-			Representation representation = new StringRepresentation(
-					json.toString(), MediaType.APPLICATION_JSON);
+			Representation representation = new StringRepresentation(xml.toString(), MediaType.APPLICATION_XML);
 			return representation;
-		} catch (UserDoesNotExistException e) {
+		} catch (TransformerConfigurationException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
 			setStatus(Status.CLIENT_ERROR_NOT_FOUND);
-			return new StringRepresentation(
-					"Usuario no encontrado en Essentials!",
-					MediaType.TEXT_PLAIN);
-			// e.printStackTrace();
+			return new StringRepresentation("Tranformacion configuration error!",MediaType.TEXT_PLAIN);
+		} catch (TransformerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			setStatus(Status.CLIENT_ERROR_NOT_FOUND);
+			return new StringRepresentation("Transformacion Error!",MediaType.TEXT_PLAIN);
 		}
 	}
 
