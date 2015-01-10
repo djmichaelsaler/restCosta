@@ -28,7 +28,9 @@ public class UserssvDecorator {
 			JSONArray pArray = new JSONArray();
 			for (int i=0;i<offplayers.length;i++){
 				pArray.put(UsersvDecorator.getAsJSON(new Usersv().getPlayerCosta(offplayers[i].getName())));
+				System.out.println(offplayers[i].getName());
 			}
+			pJSON.put("Users",pArray);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -43,6 +45,8 @@ public class UserssvDecorator {
 			docBuilder = docFactory.newDocumentBuilder();
 			// root elements
 			Document doc = docBuilder.newDocument();
+			Element rootElement = doc.createElement("Players");
+			doc.appendChild(rootElement);
 			
 			doc = getAsXMLElement(doc, offplayers);
 			
@@ -56,15 +60,11 @@ public class UserssvDecorator {
 		}
 	}
 
-	public static Document getAsXMLElement(Document doc,OfflinePlayer[] offplayers) {
-		
-		Element rootElement = doc.createElement("Players");
-		doc.appendChild(rootElement);
-		 
+	public static Document getAsXMLElement(Document doc,OfflinePlayer[] offplayers) {		 
 		// staff elements
 		
 		for (int i = 0; i < offplayers.length; i++) {
-			doc = UsersvDecorator.getAsXMLElement(doc, new Usersv().getPlayerCosta(offplayers[i].getName()));
+			doc = UsersvDecorator.getAsXMLElement(doc.getOwnerDocument(), new Usersv().getPlayerCosta(offplayers[i].getName()));
 		}
 		return doc;
 	}

@@ -50,6 +50,8 @@ public class Serversv extends ServerResource{
 
 	}
 
+	
+	/*
 	@Get("xml")
 	public Representation getServerXML() {
 		try {
@@ -79,6 +81,7 @@ public class Serversv extends ServerResource{
 			return new StringRepresentation("Transformacion Error!",MediaType.TEXT_PLAIN);
 		}
 	}
+	*/
 
 	@Options
 	public void describe() {

@@ -72,6 +72,7 @@ public class Userssv extends ServerResource{
 
 	}
 
+	/*
 	@Get("xml")
 	public Representation getEntradaLlistaXML(){
 		OfflinePlayer[] offplayers = getUsers();
@@ -104,6 +105,7 @@ public class Userssv extends ServerResource{
 			return new StringRepresentation("Transformacion Error!",MediaType.TEXT_PLAIN);
 		}
 	}
+	*/
 
 	@Options
 	public void describe() {

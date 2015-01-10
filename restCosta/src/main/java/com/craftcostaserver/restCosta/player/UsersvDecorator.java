@@ -13,6 +13,8 @@ import org.json.JSONObject;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import com.craftcostaserver.restCosta.negocio.PlayerCosta;
 
@@ -45,7 +47,7 @@ public class UsersvDecorator {
 			docBuilder = docFactory.newDocumentBuilder();
 			// root elements
 			Document doc = docBuilder.newDocument();
-			
+						
 			doc = getAsXMLElement(doc, p);
 			
 			source = new DOMSource(doc);

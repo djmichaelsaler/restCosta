@@ -71,7 +71,7 @@ public class Usersv extends ServerResource {
 		return new PlayerCosta(user, pocket, bank);
 	}
 
-	
+	/*
 	@Get("xml")
 	public Representation getEntradaLlistaXML() {
 		String user = getPlugin().getServer().getOfflinePlayer(getUser()).getName();
@@ -114,6 +114,7 @@ public class Usersv extends ServerResource {
 			return new StringRepresentation("Transformacion Error!",MediaType.TEXT_PLAIN);
 		}
 	}
+	*/
 
 	@Get("json:json")
 	public Representation getUserJSON() {
