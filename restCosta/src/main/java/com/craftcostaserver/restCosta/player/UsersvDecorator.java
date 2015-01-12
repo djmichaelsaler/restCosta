@@ -8,6 +8,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.dom.DOMSource;
 
 import org.bukkit.OfflinePlayer;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Attr;
@@ -26,16 +27,20 @@ public class UsersvDecorator {
 
 	public static JSONObject getAsJSON(PlayerCosta p) {
 		JSONObject pJSON = new JSONObject();
+		JSONObject player = new JSONObject();
+		JSONArray pArray = new JSONArray();
 		try {
 			pJSON.put("Name", p.getName());
 			pJSON.put("Pocket", p.getEconomyCosta().getPocketMoney());
 			pJSON.put("Bank", p.getEconomyCosta().getBankMoney());
 			pJSON.put("link", getRESTURI(p.getName()));
 			pJSON.put("parentLink", UserssvDecorator.getRESTURI());
+			pArray.put(pJSON);
+			player.put("User", pArray);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		return pJSON;
+		return player;
 	}
 
 	public static DOMSource getAsXMLDocument(PlayerCosta p) {
